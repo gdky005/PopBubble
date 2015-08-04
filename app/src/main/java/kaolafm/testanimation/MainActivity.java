@@ -1,10 +1,14 @@
 package kaolafm.testanimation;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.orhanobut.logger.Logger;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -12,6 +16,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout relativeLayout;
     FavorLayout favorLayout;
 
+    int delay = (int)(100 / 3000f * 1000);
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            if (msg.what == 0)
+                favorLayout.addFavor();
+
+        }
+    };
 
 
     @Override
@@ -23,6 +39,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iv.setOnClickListener(this);
 
         favorLayout = (FavorLayout) findViewById(R.id.favor);
+
+
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                int delayDefault = 0;
+
+                for (int i = 0; i < 100; i++) {
+                    Logger.i("delay:" + delayDefault);
+                    handler.sendEmptyMessageDelayed(0, delayDefault);
+                    delayDefault += delay;
+                }
+
+
+
+            }
+        }, 5000);
 
 
     }
