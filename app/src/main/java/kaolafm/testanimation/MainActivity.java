@@ -6,24 +6,31 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.orhanobut.logger.Logger;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView iv;
-    RelativeLayout relativeLayout;
     FavorLayout favorLayout;
 
-    int delay = (int)(100 / 3000f * 1000);
+    /** 3秒内所有的心均匀显示的时间间隔 */
+    int delay = 0;
+    /** 需要添加的 心 个数 */
+    int heartCount = 100;
+    /** 3000(毫秒) * 1000（秒单位）  = 3 */
+    int heartGetDataTime = 3;
+    /** 延迟5秒获取一次数据 */
+    int HEART_DELAY_TIME = 5000;
+    /** 添加 心 的MessageFlag */
+    int HEART_MESSAGE_FLAG = 0;
 
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            if (msg.what == 0)
+            if (msg.what == HEART_MESSAGE_FLAG)
                 favorLayout.addFavor();
 
         }
@@ -45,24 +52,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                int delayDefault = 0;
-
-                for (int i = 0; i < 100; i++) {
-                    Logger.i("delay:" + delayDefault);
-                    handler.sendEmptyMessageDelayed(0, delayDefault);
-                    delayDefault += delay;
-                }
-
-
-
+                addFavor(heartCount);
             }
-        }, 5000);
+        }, HEART_DELAY_TIME);
 
 
     }
 
+    private void addFavor(int heartCount) {
+        int delayDefault = 0;
+        delay = heartCount / heartGetDataTime;
 
+        for (int i = 0; i < heartCount; i++) {
+            Logger.i("delay:" + delayDefault);
+            handler.sendEmptyMessageDelayed(HEART_MESSAGE_FLAG, delayDefault);
+            delayDefault += delay;
+        }
+    }
 
 
     @Override

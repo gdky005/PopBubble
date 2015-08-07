@@ -3,9 +3,11 @@ package kaolafm.testanimation;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -58,8 +60,7 @@ public class FavorLayout extends RelativeLayout {
     }
 
     private void init() {
-
-        heart0 = getContext().getResources().getDrawable(R.drawable.heart0);
+        heart0 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart0);
 
         dWidth = heart0.getMinimumWidth();
         dHeight = heart0.getMinimumHeight();
@@ -72,21 +73,22 @@ public class FavorLayout extends RelativeLayout {
         initData();
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void initData() {
         //初始化显示的图片
         drawables = new Drawable[12];
 
-        Drawable heart1 = getResources().getDrawable(R.drawable.heart1);
-        Drawable heart2 = getResources().getDrawable(R.drawable.heart2);
-        Drawable heart3 = getResources().getDrawable(R.drawable.heart3);
-        Drawable heart4 = getResources().getDrawable(R.drawable.heart4);
-        Drawable heart5 = getResources().getDrawable(R.drawable.heart5);
-        Drawable heart6 = getResources().getDrawable(R.drawable.heart6);
-        Drawable heart7 = getResources().getDrawable(R.drawable.heart7);
-        Drawable heart8 = getResources().getDrawable(R.drawable.heart8);
-        Drawable heart9 = getResources().getDrawable(R.drawable.heart9);
-        Drawable heart10 = getResources().getDrawable(R.drawable.heart10);
-        Drawable heart11 = getResources().getDrawable(R.drawable.heart11);
+        Drawable heart1 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart1);
+        Drawable heart2 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart2);
+        Drawable heart3 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart3);
+        Drawable heart4 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart4);
+        Drawable heart5 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart5);
+        Drawable heart6 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart6);
+        Drawable heart7 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart7);
+        Drawable heart8 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart8);
+        Drawable heart9 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart9);
+        Drawable heart10 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart10);
+        Drawable heart11 = KLDrawableUtils.getDrawable(getContext(), R.drawable.heart11);
 
         //赋值给drawables
         drawables[0] = heart0;

@@ -14,12 +14,7 @@ public class MyTest extends ActivityInstrumentationTestCase2 {
 
 
     public void test() {
-
-        Object o = (int)(100 / 3000f * 1000);
-
         Logger.i("日志是：" + 100 / 3000d);
         Logger.i("日志是：" + 100 / 3000f * 1000);
-
-
     }
 }
